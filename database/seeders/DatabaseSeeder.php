@@ -28,9 +28,10 @@ class DatabaseSeeder extends Seeder
 
         //   Producto::factory()->count(100)->create();
 
-        //$this->call(DocumentoSeeder::class);
-        //$this->call(ComprobanteSeeder::class);
-        //$this->call(PermissionSeeder::class);
-        //$this->call(UserSeeder::class);
+        $this->call(DocumentoSeeder::class);
+        $this->call(WorldSeeder::class);
+        $this->call(ComprobanteSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

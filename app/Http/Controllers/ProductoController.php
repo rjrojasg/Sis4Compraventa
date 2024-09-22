@@ -73,6 +73,7 @@ class ProductoController extends Controller
 
             DB::commit();
         } catch (Exception $e) {
+            dd($e);
             DB::rollBack();
         }
         return redirect()->route('productos.index')

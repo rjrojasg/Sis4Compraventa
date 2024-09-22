@@ -85,29 +85,11 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="valor_impuesto">Valor del Impuesto</label>
-                                                <input type="number" value="{{ $empresa->valor_impuesto }}"
-                                                    name="valor_impuesto" class="form-control" required>
-                                                @error('valor_impuesto')
-                                                    <small style="color: red;">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-                                        </div>
+
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="nombre_impuesto">Nombre del Impuesto</label>
-                                                <input type="text" value="{{ $empresa->nombre_impuesto }}"
-                                                    name="nombre_impuesto" class="form-control" required>
-                                                @error('nombre_impuesto')
-                                                    <small style="color: red;">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="moneda">Tipo de Moneda</label>

@@ -16,10 +16,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //Usuario administrador
-        /* $rol = Role::create(['name' => 'administrador']);
+        $rol = Role::create(['name' => 'administrador']);
         $permisos = Permission::pluck('id', 'id')->all();
         $rol->syncPermissions($permisos);
-        $user = User::find(1);
+        /* $user = User::find(1);
         $user->assignRole('administrador'); */
     }
 }

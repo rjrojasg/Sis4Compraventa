@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('descripcion', 255)->nullable();
             $table->date('fecha_vencimiento')->nullable();
             $table->tinyInteger('estado')->default(1);
-            $table->foreignId('marca_id')->unique()->constrained('marcas')->onDelete('cascade');
-            $table->foreignId('presentacione_id')->unique()->constrained('presentaciones')->onDelete('cascade');
+            $table->foreignId('marca_id')->constrained('marcas')->onDelete('cascade');
+            $table->foreignId('presentacione_id')->constrained('presentaciones')->onDelete('cascade');
 
             $table->timestamps();
         });

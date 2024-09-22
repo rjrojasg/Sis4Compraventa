@@ -68,8 +68,6 @@ class EmpresaController extends Controller
             'rif' => 'required|unique:empresas',
             'telefono' => 'required',
             'correo' => 'required|unique:empresas',
-            'valor_impuesto' => 'required',
-            'nombre_impuesto' => 'required',
             'moneda' => 'required',
             'direccion' => 'required',
             'pais' => 'required',
@@ -84,8 +82,6 @@ class EmpresaController extends Controller
         $empresa->rif = $request->rif;
         $empresa->telefono = $request->telefono;
         $empresa->correo = $request->correo;
-        $empresa->valor_impuesto = $request->valor_impuesto;
-        $empresa->nombre_impuesto = $request->nombre_impuesto;
         $empresa->moneda = $request->moneda;
         $empresa->direccion = $request->direccion;
         $empresa->pais = $request->pais;
@@ -102,7 +98,7 @@ class EmpresaController extends Controller
         $usuario->empresa_id = $empresa->id;
         $usuario->save();
 
-        //$usuario->assignRole('ADMINISTRADOR');
+        $usuario->assignRole('administrador');
 
         Auth::login($usuario);
 
@@ -148,8 +144,6 @@ class EmpresaController extends Controller
             'rif' => 'required|unique:empresas,rif,' . $id,
             'telefono' => 'required',
             'correo' => 'required|unique:empresas,correo,' . $id,
-            'valor_impuesto' => 'required',
-            'nombre_impuesto' => 'required',
             'moneda' => 'required',
             'direccion' => 'required',
             'pais' => 'required',
@@ -164,8 +158,6 @@ class EmpresaController extends Controller
         $empresa->rif = $request->rif;
         $empresa->telefono = $request->telefono;
         $empresa->correo = $request->correo;
-        $empresa->valor_impuesto = $request->valor_impuesto;
-        $empresa->nombre_impuesto = $request->nombre_impuesto;
         $empresa->moneda = $request->moneda;
         $empresa->direccion = $request->direccion;
         $empresa->pais = $request->pais;

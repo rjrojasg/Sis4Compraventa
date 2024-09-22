@@ -6,9 +6,10 @@
 @stop
 
 @push('css')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 
 @section('content')
@@ -180,8 +181,8 @@
                                             {{-- Impuesto --}}
                                             <div class="col-md-6 mb-2">
                                                 <label for="impuesto">Impuesto</label><b>*</b>
-                                                <input readonly value="16" type="text" name="impuesto"
-                                                    id="impuesto" class="form-control border-success">
+                                                <input readonly type="text" name="impuesto" id="impuesto"
+                                                    class="form-control border-success">
                                                 @error('impuesto')
                                                     <small class="text-danger">{{ '*' . $message }}</small>
                                                 @enderror
@@ -263,6 +264,7 @@
 @stop
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#btn_agregar').click(function() {
@@ -273,6 +275,7 @@
             });
 
             disableButtons();
+            $('#impuesto').val(impuesto + '%');
         });
 
         //variables
@@ -309,8 +312,10 @@
             $('#sumas').html(sumas);
             $('#iva').html(iva);
             $('#total').html(total);
+            $('#impuesto').val(impuesto + '%');
             $('#inputTotal').val(total);
 
+            limpiarCampos();
             disableButtons();
 
         }
@@ -341,10 +346,12 @@
                     //validaciones 03 - que precio de Venta sea Mayor a Precio de Compra
                     if (parseFloat(precioVenta) > parseFloat(precioCompra)) {
                         //calcular valores
-                        subtotal[cont] = cantidad * precioCompra;
+                        subtotal[cont] = round(cantidad * precioCompra);
                         sumas += subtotal[cont];
-                        iva = sumas / 100 * 16;
-                        total = sumas + iva;
+                        iva = round(sumas / 100 * impuesto);
+                        total = round(sumas + iva);
+
+
 
                         //crear la fila
                         let fila = '<tr id="fila' + cont + '">' +
@@ -364,6 +371,7 @@
 
                         //acciones despues de añadir fila
                         $('#tabla_detalle').append(fila);
+                        limpiarCampos();
                         cont++;
                         disableButtons();
 
@@ -371,6 +379,7 @@
                         $('#sumas').html(sumas);
                         $('#iva').html(iva);
                         $('#total').html(total);
+                        $('#impuesto').val(iva);
                         $('#inputTotal').val(total);
 
                     } else {
@@ -388,19 +397,46 @@
         }
 
         function eliminarProducto(indice) {
-            //calcular valores
-            sumas -= subtotal[indice];
-            iva = sumas / 100 * 16;
-            total = sumas + iva;
-            //mostrar los campos calculados
+            //Calcular valores
+            sumas -= round(subtotal[indice]);
+            iva = round(sumas / 100 * impuesto);
+            total = round(sumas + iva);
+
+            //Mostrar los campos calculados
             $('#sumas').html(sumas);
             $('#iva').html(iva);
             $('#total').html(total);
-            $('#inputTotal').val(total);
-            //eliminar fila de la table
+            $('#impuesto').val(iva);
+            $('#InputTotal').val(total);
+
+            //Eliminar el fila de la tabla
             $('#fila' + indice).remove();
 
+            disableButtons();
         }
+
+        function limpiarCampos() {
+            let select = $('#producto_id');
+            select.selectpicker('val', '');
+            $('#cantidad').val('');
+            $('#precio_compra').val('');
+            $('#precio_venta').val('');
+        }
+
+        function round(num, decimales = 2) {
+            var signo = (num >= 0 ? 1 : -1);
+            num = num * signo;
+            if (decimales === 0) //con 0 decimales
+                return signo * Math.round(num);
+            // round(x * 10 ^ decimales)
+            num = num.toString().split('e');
+            num = Math.round(+(num[0] + 'e' + (num[1] ? (+num[1] + decimales) : decimales)));
+            // x * 10 ^ (-decimales)
+            num = num.toString().split('e');
+            return signo * (num[0] + 'e' + (num[1] ? (+num[1] - decimales) : -decimales));
+        }
+
+
 
         function showModal(message, icon = 'error') {
             const Toast = Swal.mixin({
@@ -429,7 +465,7 @@
     </script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> --}}
 
     {{--  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script> --}}
 

@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('rif')->unique();
             $table->string('telefono');
             $table->string('correo')->unique();
-            $table->string('valor_impuesto');
-            $table->string('nombre_impuesto');
             $table->string('moneda');
             $table->string('direccion');
             $table->string('pais');
