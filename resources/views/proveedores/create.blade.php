@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="documento_id ">Tipo de Documento</label><b>*</b>
+                                    <label for="documento_id">Tipo de Documento</label><b>*</b>
                                     <select name="documento_id" id="documento_id" class="form-control">
 
                                         <option value="" selected>Selecciona una Opción</option>

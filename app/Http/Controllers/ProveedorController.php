@@ -49,13 +49,14 @@ class ProveedorController extends Controller
 
         try {
             DB::beginTransaction();
-            $proveedore = Persona::create();
+            $proveedore = Persona::create($request->validated());
             $proveedore->proveedor()->create([
                 'persona_id' => $proveedore->id
             ]);
 
             DB::commit();
-        } catch (Exception) {
+        } catch (Exception $e) {
+            dd($e);
             DB::rollBack();
         }
 

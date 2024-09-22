@@ -45,19 +45,18 @@
                                             {{-- Cantidad --}}
                                             <div class="col-md-4 mb-2">
                                                 <label for="cantidad">Cantidad</label><b>*</b>
-                                                <input required type="number" name="cantidad" id="cantidad"
-                                                    class="form-control">
+                                                <input type="number" name="cantidad" id="cantidad" class="form-control">
                                             </div>
                                             {{-- Precio de Compra --}}
                                             <div class="col-md-4 mb-2">
                                                 <label for="precio_compra">Precio de Compra</label><b>*</b>
-                                                <input required type="number" name="precio_compra" id="precio_compra"
+                                                <input type="number" name="precio_compra" id="precio_compra"
                                                     class="form-control" step="0.1">
                                             </div>
                                             {{-- Precio de Venta --}}
                                             <div class="col-md-4 mb-2">
                                                 <label for="precio_venta">Precio de Venta</label><b>*</b>
-                                                <input required type="number" name="precio_venta" id="precio_venta"
+                                                <input type="number" name="precio_venta" id="precio_venta"
                                                     class="form-control" step="0.1">
                                             </div>
                                             {{-- Botones --}}
